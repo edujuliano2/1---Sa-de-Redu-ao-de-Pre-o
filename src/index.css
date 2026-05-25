@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-slate-700 bg-slate-50 font-sans selection:bg-teal-500 selection:text-white;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans tracking-tight text-trygg-navy-900;
+  }
+}
+
+@layer components {
+  /* Premium Glassmorphic Card */
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300;
+  }
+
+  .glass-card-dark {
+    @apply bg-trygg-navy-800/90 backdrop-blur-md border border-trygg-navy-700/50 shadow-xl;
+  }
+
+  /* Glow effects */
+  .glow-teal {
+    box-shadow: 0 0 20px -2px rgba(13, 148, 136, 0.25);
+  }
+  
+  .glow-navy {
+    box-shadow: 0 0 25px -5px rgba(11, 25, 44, 0.15);
+  }
+
+  .glow-pulse {
+    animation: glowPulse 2s infinite ease-in-out;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% {
+      box-shadow: 0 0 15px -3px rgba(13, 148, 136, 0.25);
+    }
+    50% {
+      box-shadow: 0 0 25px 2px rgba(13, 148, 136, 0.45);
+    }
+  }
+
+  /* Grid overlay dots */
+  .bg-grid-dots {
+    background-image: radial-gradient(rgba(148, 163, 184, 0.12) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+  }
+
+  .bg-grid-dots-dark {
+    background-image: radial-gradient(rgba(30, 62, 98, 0.2) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+  }
+
+  /* Customized slider range input */
+  .custom-range-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #E2E8F0;
+    border-radius: 9999px;
+    outline: none;
+  }
+
+  .custom-range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #0D9488;
+    cursor: pointer;
+    border: 3px solid #FFFFFF;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: transform 0.1s ease, background 0.1s ease;
+  }
+
+  .custom-range-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    background: #0F766E;
+  }
+
+  .custom-range-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #0D9488;
+    cursor: pointer;
+    border: 3px solid #FFFFFF;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: transform 0.1s ease, background 0.1s ease;
+  }
+
+  .custom-range-slider::-moz-range-thumb:hover {
+    transform: scale(1.15);
+    background: #0F766E;
+  }
+}
+
+/* Custom Scrollbar for premium corporate feeling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
