@@ -1,225 +1,251 @@
 import React from 'react';
-import { ArrowUpRight, TrendingDown, DollarSign, CheckCircle2, ShieldCheck, Activity } from 'lucide-react';
+import { CheckCircle2, ChevronDown, ChevronRight, ShieldCheck, Star } from 'lucide-react';
+import type { QuoteFormState } from '../types';
+
+type AgeBandKey = keyof QuoteFormState['ages'];
+
+const AGE_BANDS: Array<{ key: AgeBandKey; label: string }> = [
+  { key: 'age_00_18', label: '00 a 18 anos' },
+  { key: 'age_19_28', label: '19 a 28 anos' },
+  { key: 'age_29_38', label: '29 a 38 anos' },
+  { key: 'age_39_48', label: '39 a 48 anos' },
+  { key: 'age_49_53', label: '49 a 53 anos' },
+  { key: 'age_54_58', label: '54 a 58 anos' },
+  { key: 'age_59_plus', label: '59 anos ou mais' },
+];
 
 interface HeroProps {
+  quoteForm: QuoteFormState;
+  onFormUpdate: <K extends keyof QuoteFormState>(field: K, value: QuoteFormState[K]) => void;
+  onAgeChange: (key: AgeBandKey, value: string) => void;
   onPrimaryCtaClick: () => void;
-  onSecondaryCtaClick: () => void;
+  totalAgeLives: number;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onPrimaryCtaClick, onSecondaryCtaClick }) => {
-  return (
-    <section className="relative overflow-hidden pt-28 pb-20 sm:pb-24 lg:pt-36 lg:pb-32 bg-gradient-to-b from-trygg-navy-50/70 via-white to-[#F8FAFC]">
-      {/* Visual Dot Grid Overlay */}
-      <div className="absolute inset-0 bg-grid-dots opacity-70 pointer-events-none"></div>
+const OPERATORS = [
+  'Unimed',
+  'Bradesco Saúde',
+  'SulAmérica',
+  'Amil',
+  'Porto Saúde',
+  'NotreDame Intermédica',
+  'Hapvida',
+  'Outra',
+];
 
-      {/* Decorative Blur Spheres */}
-      <div className="absolute top-1/4 left-1/10 w-96 h-96 bg-trygg-teal/5 rounded-full filter blur-3xl pointer-events-none"></div>
-      <div className="absolute top-1/3 right-1/10 w-[500px] h-[500px] bg-trygg-navy-100/30 rounded-full filter blur-3xl pointer-events-none"></div>
+export const Hero: React.FC<HeroProps> = ({
+  quoteForm,
+  onFormUpdate,
+  onAgeChange,
+  onPrimaryCtaClick,
+  totalAgeLives,
+}) => {
+  return (
+    <section
+      id="cotacao"
+      className="relative overflow-hidden pt-24 sm:pt-28 lg:pt-32 pb-16 sm:pb-20 lg:pb-24 bg-[radial-gradient(circle_at_top_left,_rgba(13,148,136,0.10),_transparent_34%),linear-gradient(180deg,_#F8FAFC_0%,_#FFFFFF_42%,_#F8FAFC_100%)]"
+    >
+      <div className="absolute inset-0 bg-grid-dots opacity-60 pointer-events-none"></div>
+      <div className="absolute -top-24 right-0 w-80 h-80 bg-trygg-teal/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[28rem] h-[28rem] bg-trygg-navy-100/40 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
-          {/* Hero Content Left (5 Cols / 6 Cols) */}
-          <div className="lg:col-span-7 text-left space-y-6 sm:space-y-8 animate-fade-in-up">
-            
-            {/* Tagline / Subtitle */}
-            <div className="inline-flex items-center gap-2 bg-trygg-navy-900/5 border border-trygg-navy-900/10 px-3 py-1.5 rounded-full">
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-trygg-teal opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-trygg-teal"></span>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          <div className="order-2 lg:order-1 lg:col-span-7 space-y-8 text-left">
+            <div className="inline-flex items-center gap-2 rounded-full border border-trygg-teal/15 bg-white/80 px-3 py-1.5 shadow-sm backdrop-blur">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-trygg-teal opacity-75 animate-ping"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-trygg-teal"></span>
               </span>
-              <span className="text-xs font-semibold text-trygg-navy-800 tracking-wide uppercase">
-                Parcerias Oficiais com Planos de Saúde para PMEs
+              <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-500">
+                Cotação gratuita e rápida para PME
               </span>
             </div>
 
-            {/* Headline */}
-            <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-[56px] leading-[1.1] tracking-tight text-trygg-navy-900">
-              Seu Plano Empresarial Pode Estar Custando{' '}
-              <span className="relative inline-block text-trygg-teal">
-                Muito Mais
-                <span className="absolute bottom-1 left-0 w-full h-[6px] bg-trygg-teal/20 rounded"></span>
-              </span>{' '}
-              do Que Deveria.
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-base sm:text-lg lg:text-xl text-slate-500 max-w-2xl leading-relaxed">
-              Descubra como reduzir os custos do plano de saúde da sua empresa sem perder qualidade na cobertura através de nossas parcerias diretas com as principais operadoras.
-            </p>
-
-            {/* Core Value Quick Bullet Points */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-trygg-teal flex-shrink-0" />
-                <span className="text-sm font-medium text-slate-600">Redução de até 35% nos prêmios</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-trygg-teal flex-shrink-0" />
-                <span className="text-sm font-medium text-slate-600">Upgrade de rede credenciada</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-trygg-teal flex-shrink-0" />
-                <span className="text-sm font-medium text-slate-600">Sem carência adicional na migração</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-trygg-teal flex-shrink-0" />
-                <span className="text-sm font-medium text-slate-600">Estudo de parcerias 100% gratuito</span>
-              </div>
+            <div className="space-y-5">
+              <h1 className="max-w-3xl text-4xl sm:text-5xl lg:text-[62px] font-black leading-[1.02] tracking-tight text-trygg-navy-900">
+                REDUZA OS CUSTOS DO PLANO DE SAÚDE DA SUA EMPRESA
+              </h1>
+              <p className="max-w-2xl text-lg sm:text-xl text-slate-600 leading-relaxed">
+                Compare gratuitamente as principais operadoras do mercado e descubra oportunidades reais de economia para sua empresa.
+              </p>
             </div>
 
-            {/* Actions (CTAs) */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl">
+              {[
+                'Cotação gratuita',
+                'Atendimento especializado',
+                'Comparação entre operadoras',
+                'Economia potencial no plano atual',
+                'Retorno rápido',
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-2 rounded-2xl border border-slate-200/80 bg-white/85 px-4 py-3 shadow-sm backdrop-blur">
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-trygg-teal" />
+                  <span className="text-sm font-semibold text-slate-700">{item}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
               <button
                 onClick={onPrimaryCtaClick}
                 id="cta-hero-whatsapp"
-                className="group flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95"
+                className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-emerald-500 px-6 py-4 text-white shadow-xl shadow-emerald-500/20 transition-all duration-300 hover:bg-emerald-600 hover:-translate-y-0.5 active:scale-95"
               >
-                <svg
-                  className="w-5 h-5 fill-current"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436.002 9.858-4.384 9.86-9.778.001-2.614-1.015-5.07-2.861-6.92C16.615 2.056 14.159 1.037 11.55 1.037 6.114 1.037 1.692 5.423 1.69 10.817c-.001 1.679.452 3.3 1.309 4.729L2.03 21.03l5.617-1.876zM17.67 14.87c-.29-.145-1.713-.846-1.977-.941-.264-.096-.456-.145-.648.145-.191.29-.741.94-.908 1.132-.167.19-.333.21-.623.067-.29-.145-1.226-.452-2.335-1.442-.864-.77-1.447-1.721-1.616-2.011-.17-.29-.018-.447.127-.592.13-.13.29-.339.435-.508.145-.17.19-.29.29-.483.096-.193.048-.362-.024-.508-.073-.145-.648-1.56-.888-2.138-.233-.56-.47-.482-.648-.492-.167-.008-.36-.01-.552-.01s-.504.072-.768.362c-.264.29-1.008.986-1.008 2.406 0 1.42 1.032 2.788 1.176 2.98.145.193 2.03 3.1 4.919 4.348.687.297 1.224.475 1.642.608.69.22 1.319.189 1.815.115.553-.083 1.714-.7 1.956-1.378.24-.678.24-1.258.17-1.378-.072-.12-.264-.193-.554-.339z" />
-                </svg>
-                <span>Falar no WhatsApp</span>
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/15">
+                  <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436.002 9.858-4.384 9.86-9.778.001-2.614-1.015-5.07-2.861-6.92C16.615 2.056 14.159 1.037 11.55 1.037 6.114 1.037 1.692 5.423 1.69 10.817c-.001 1.679.452 3.3 1.309 4.729L2.03 21.03l5.617-1.876zM17.67 14.87c-.29-.145-1.713-.846-1.977-.941-.264-.096-.456-.145-.648.145-.191.29-.741.94-.908 1.132-.167.19-.333.21-.623.067-.29-.145-1.226-.452-2.335-1.442-.864-.77-1.447-1.721-1.616-2.011-.17-.29-.018-.447.127-.592.13-.13.29-.339.435-.508.145-.17.19-.29.29-.483.096-.193.048-.362-.024-.508-.073-.145-.648-1.56-.888-2.138-.233-.56-.47-.482-.648-.492-.167-.008-.36-.01-.552-.01s-.504.072-.768.362c-.264.29-1.008.986-1.008 2.406 0 1.42 1.032 2.788 1.176 2.98.145.193 2.03 3.1 4.919 4.348.687.297 1.224.475 1.642.608.69.22 1.319.189 1.815.115.553-.083 1.714-.7 1.956-1.378.24-.678.24-1.258.17-1.378-.072-.12-.264-.193-.554-.339z" />
+                  </svg>
+                </span>
+                <span className="text-left">
+                  <span className="block text-base font-extrabold leading-tight">Solicitar Cotação Gratuita</span>
+                  <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80">
+                    Receber cotação no WhatsApp
+                  </span>
+                </span>
+                <ChevronRight className="hidden sm:block h-4 w-4 opacity-80 transition-transform group-hover:translate-x-0.5" />
               </button>
-              <button
-                onClick={onSecondaryCtaClick}
-                id="cta-hero-analysis"
-                className="inline-flex items-center justify-center gap-1.5 border-2 border-trygg-navy-900 hover:bg-trygg-navy-900 hover:text-white text-trygg-navy-900 font-bold px-8 py-4 rounded-xl transition-all duration-300 transform active:scale-95 shadow-sm hover:shadow"
-              >
-                <span>Solicitar Análise Gratuita</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </button>
-            </div>
-            
-            {/* Quick Trust Badges */}
-            <div className="pt-4 flex flex-wrap items-center gap-6 text-slate-400 border-t border-slate-100">
-              <div className="flex items-center gap-1">
-                <ShieldCheck className="w-4.5 h-4.5 text-trygg-teal" />
-                <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Parceria Oficial com Operadoras</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Activity className="w-4.5 h-4.5 text-trygg-teal" />
-                <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Gestão 100% Digital</span>
-              </div>
             </div>
 
+            <div className="flex flex-wrap items-center gap-5 border-t border-slate-200/80 pt-5 text-left">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="h-4.5 w-4.5 text-trygg-teal" />
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Atendimento consultivo especializado</span>
+              </div>
+              <div className="flex items-center gap-1.5 rounded-full bg-slate-900/5 px-3 py-1.5">
+                <div className="flex text-amber-400">
+                  <Star className="h-4 w-4 fill-current stroke-none" />
+                  <Star className="h-4 w-4 fill-current stroke-none" />
+                  <Star className="h-4 w-4 fill-current stroke-none" />
+                  <Star className="h-4 w-4 fill-current stroke-none" />
+                  <Star className="h-4 w-4 fill-current stroke-none" />
+                </div>
+                <span className="text-xs font-semibold text-slate-500">Atendimento consultivo especializado</span>
+              </div>
+            </div>
           </div>
 
-          {/* Hero Visual Mockup Right (7 Cols / 6 Cols) */}
-          <div className="lg:col-span-5 relative w-full flex justify-center lg:justify-end animate-fade-in animate-float duration-[8s] py-4">
-            
-            {/* Premium CSS-only Dashboard Mockup Container */}
-            <div className="w-full max-w-[440px] bg-trygg-navy-900 text-white rounded-3xl p-6 shadow-2xl relative border border-trygg-navy-700/50 glow-navy">
-              
-              {/* Card Header */}
-              <div className="flex items-center justify-between border-b border-trygg-navy-800 pb-4 mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-3.5 h-3.5 bg-trygg-teal rounded-full flex items-center justify-center">
-                    <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  </div>
-                  <div>
-                    <h3 className="text-xs font-bold font-sans tracking-wide uppercase text-slate-300">TRYGG Optimise</h3>
-                    <p className="text-[10px] text-slate-500">Simulador de Saúde Corporativa</p>
-                  </div>
-                </div>
-                <span className="bg-trygg-teal/10 border border-trygg-teal/20 text-trygg-teal text-[10px] font-bold px-2 py-0.5 rounded-full">
-                  Ativo
-                </span>
-              </div>
-
-              {/* Central Graph & Statistics */}
-              <div className="space-y-4">
-                <div className="flex justify-between items-end">
-                  <div>
-                    <p className="text-[10px] text-slate-400 font-medium">Economia Média Estimada</p>
-                    <p className="text-3xl font-extrabold text-white mt-1">
-                      -28<span className="text-trygg-teal">%</span>
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold px-2.5 py-1 rounded-lg">
-                    <TrendingDown className="w-3.5 h-3.5" />
-                    <span>Redução de Custos</span>
-                  </div>
-                </div>
-
-                {/* Graph bars representation */}
-                <div className="bg-trygg-navy-950 rounded-2xl p-4 space-y-3.5 border border-trygg-navy-800">
-                  {/* Bar 1 */}
-                  <div>
-                    <div className="flex justify-between text-[10px] text-slate-400 font-medium mb-1">
-                      <span>Custo Atual do Plano</span>
-                      <span className="font-semibold text-slate-300">R$ 14.500/mês</span>
-                    </div>
-                    <div className="w-full h-3 bg-trygg-navy-800 rounded-full overflow-hidden">
-                      <div className="w-full h-full bg-trygg-navy-700 rounded-full"></div>
-                    </div>
-                  </div>
-                  {/* Bar 2 */}
-                  <div>
-                    <div className="flex justify-between text-[10px] text-slate-400 font-medium mb-1">
-                      <span>Proposta Inteligente TRYGG</span>
-                      <span className="font-semibold text-trygg-teal">R$ 10.440/mês</span>
-                    </div>
-                    <div className="w-full h-3 bg-trygg-navy-800 rounded-full overflow-hidden">
-                      <div className="w-[72%] h-full bg-trygg-teal rounded-full relative">
-                        <span className="absolute inset-0 bg-white/20 animate-shimmer" style={{ backgroundSize: '200% 100%' }}></span>
+          <div className="order-1 lg:order-2 lg:col-span-5">
+            <div className="rounded-[28px] border border-white/70 bg-white/90 p-5 sm:p-6 shadow-[0_30px_80px_rgba(15,23,42,0.12)] backdrop-blur-xl">
+                  <div className="rounded-[24px] bg-[linear-gradient(180deg,_#0B192C_0%,_#102746_100%)] p-5 sm:p-6 text-white shadow-2xl">
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.32em] text-trygg-teal">
+                          Simulador de cotação
+                        </p>
+                        <h2 className="mt-2 text-3xl sm:text-[2.05rem] font-black tracking-tight text-white">
+                          Preencha os dados abaixo para receber uma análise personalizada.
+                        </h2>
                       </div>
                     </div>
-                  </div>
-                </div>
 
-                {/* Metrics Grid */}
-                <div className="grid grid-cols-2 gap-3 text-left">
-                  <div className="bg-trygg-navy-800/50 border border-trygg-navy-700/30 p-3 rounded-xl">
-                    <div className="flex items-center gap-1.5 mb-1 text-[10px] text-slate-400">
-                      <DollarSign className="w-3 h-3 text-trygg-teal" />
-                      <span>Retorno Anual (ROI)</span>
+                <div className="mt-6 space-y-4">
+                  <div className="space-y-2">
+                    <label className="block text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+                      Sua empresa já possui plano de saúde?
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {['sim', 'nao'].map((option) => (
+                        <button
+                          key={option}
+                          type="button"
+                          onClick={() => {
+                            onFormUpdate('hasPlan', option as 'sim' | 'nao');
+                            if (option === 'nao') {
+                              onFormUpdate('operator', '');
+                            }
+                          }}
+                          className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-bold transition-all duration-200 ${
+                            quoteForm.hasPlan === option
+                              ? 'border-trygg-teal bg-trygg-teal text-white shadow-lg shadow-trygg-teal/20'
+                              : 'border-white/10 bg-white/5 text-slate-200 hover:border-white/20 hover:bg-white/10'
+                          }`}
+                        >
+                          <span className={`h-2 w-2 rounded-full ${quoteForm.hasPlan === option ? 'bg-white' : 'bg-slate-400'}`} />
+                          {option === 'sim' ? 'Sim' : 'Não'}
+                        </button>
+                      ))}
                     </div>
-                    <p className="text-sm font-bold text-white">R$ 48.720,00</p>
                   </div>
-                  <div className="bg-trygg-navy-800/50 border border-trygg-navy-700/30 p-3 rounded-xl">
-                    <div className="flex items-center gap-1.5 mb-1 text-[10px] text-slate-400">
-                      <ShieldCheck className="w-3.5 h-3.5 text-trygg-teal" />
-                      <span>Garantia de Rede</span>
+
+                  {quoteForm.hasPlan === 'sim' && (
+                    <div className="space-y-2">
+                      <label htmlFor="operator" className="block text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+                        Operadora atual
+                      </label>
+                      <select
+                        id="operator"
+                        value={quoteForm.operator}
+                        onChange={(e) => onFormUpdate('operator', e.target.value)}
+                        className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm font-medium text-white outline-none transition focus:border-trygg-teal focus:bg-white/10"
+                      >
+                        <option value="" className="text-slate-900">
+                          Selecione
+                        </option>
+                        {OPERATORS.map((operator) => (
+                          <option key={operator} value={operator} className="text-slate-900">
+                            {operator}
+                          </option>
+                        ))}
+                      </select>
                     </div>
-                    <p className="text-sm font-bold text-white">Mantida ou Superior</p>
-                  </div>
-                </div>
+                  )}
 
-                {/* Simulated operator listing checkmarks */}
-                <div className="space-y-2 pt-1.5">
-                  <p className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">Simulação de Operadoras</p>
-                  
-                  <div className="flex items-center justify-between bg-trygg-navy-950/60 p-2 rounded-lg text-xs">
-                    <span className="font-medium text-slate-300">Portabilidade Bradesco</span>
-                    <span className="text-emerald-400 font-bold">-26% Custo</span>
+                  <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-3 py-3">
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Total de vidas informadas</p>
+                    <p className="text-lg font-black text-white">{totalAgeLives}</p>
                   </div>
-                  <div className="flex items-center justify-between bg-trygg-navy-950/60 p-2 rounded-lg text-xs">
-                    <span className="font-medium text-slate-300">Portabilidade SulAmérica</span>
-                    <span className="text-emerald-400 font-bold">-32% Custo</span>
-                  </div>
-                </div>
 
+                  <p className="text-[11px] leading-relaxed text-slate-300">
+                    A composição etária fica logo abaixo para completar a cotação.
+                  </p>
+
+                  <details
+                    id="hero-age-form"
+                    open
+                    className="group rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4"
+                  >
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
+                      <div className="text-left">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">
+                          Composição etária
+                        </p>
+                        <p className="mt-1 text-xs font-semibold text-white sm:text-sm">
+                          Preencha as faixas etárias
+                        </p>
+                      </div>
+                      <ChevronDown className="h-4 w-4 shrink-0 text-slate-300 transition-transform duration-300 group-open:rotate-180" />
+                    </summary>
+
+                    <div className="mt-3 space-y-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {AGE_BANDS.map((band) => (
+                          <label
+                            key={band.key}
+                            className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2 transition-colors hover:bg-white/10"
+                          >
+                            <span className="block text-xs font-semibold text-slate-200 sm:text-sm">{band.label}</span>
+                            <input
+                              type="number"
+                              min="0"
+                              inputMode="numeric"
+                              value={quoteForm.ages[band.key]}
+                              onChange={(e) => onAgeChange(band.key, e.target.value)}
+                              className="w-16 rounded-lg border border-white/10 bg-white/5 px-2 py-1.5 text-center text-sm font-black text-white outline-none transition placeholder:text-slate-500 focus:border-trygg-teal focus:bg-white/10"
+                              placeholder="0"
+                            />
+                          </label>
+                        ))}
+                      </div>
+                      <p className="text-[11px] leading-relaxed text-slate-300">
+                        A soma das faixas precisa bater com o total de vidas informado para seguirmos com a cotação.
+                      </p>
+                    </div>
+                  </details>
+                </div>
               </div>
-
-              {/* Floating Decorative Glassmorphic Tag */}
-              <div className="absolute -bottom-4 -left-6 bg-white/95 backdrop-blur text-trygg-navy-900 border border-slate-200 p-3.5 rounded-2xl shadow-xl flex items-center gap-3 animate-pulse-subtle max-w-[200px]">
-                <div className="p-1.5 bg-emerald-500/10 rounded-lg text-emerald-500">
-                  <TrendingDown className="w-4 h-4" />
-                </div>
-                <div className="text-left">
-                  <p className="text-[9px] uppercase tracking-wider font-extrabold text-slate-400 leading-none">Economia Média</p>
-                  <p className="text-xs font-black text-trygg-navy-900 mt-1">R$ 4.060 economizados/mês</p>
-                </div>
-              </div>
-
             </div>
-
           </div>
-
         </div>
       </div>
     </section>

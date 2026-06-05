@@ -12,13 +12,13 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 animate-fade-in-up">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 animate-fade-in-up">
       <a
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         id="floating-whatsapp-btn"
-        className="group flex items-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-3 rounded-full shadow-lg hover:shadow-emerald-500/20 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative"
+        className="group flex items-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-4 py-3.5 sm:px-5 sm:py-4 rounded-full shadow-[0_18px_45px_rgba(16,185,129,0.28)] hover:shadow-[0_18px_55px_rgba(16,185,129,0.38)] transition-all duration-300 transform hover:-translate-y-1 relative"
       >
         {/* Pulsing Outer Rings */}
         <span className="absolute -inset-0.5 rounded-full bg-emerald-400 opacity-40 animate-ping group-hover:opacity-0 transition-opacity duration-300"></span>
@@ -33,7 +33,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
         </svg>
 
         {/* Text */}
-        <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-in-out font-semibold text-sm whitespace-nowrap">
+        <span className="max-w-[8rem] sm:max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-in-out font-semibold text-sm whitespace-nowrap">
           Falar no WhatsApp
         </span>
 

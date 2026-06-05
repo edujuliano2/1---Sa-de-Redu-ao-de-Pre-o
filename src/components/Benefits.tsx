@@ -1,84 +1,72 @@
 import React from 'react';
-import { PiggyBank, BarChart, Headset, Landmark } from 'lucide-react';
+import { BadgeCheck, ShieldCheck, TrendingDown, Handshake, Headset, Wallet } from 'lucide-react';
 
 export const Benefits: React.FC = () => {
   const benefits = [
     {
-      icon: <PiggyBank className="w-8 h-8 text-trygg-teal" />,
-      title: 'Economia Inteligente',
-      tagline: 'Gestão de Custos Ativa',
-      desc: 'Reduza de forma expressiva o custo fixo mensal da folha de benefícios sem comprometer a qualidade ou abrangência dos hospitais parceiros.',
+      icon: <BadgeCheck className="h-6 w-6" />,
+      title: 'Comparação entre operadoras',
+      desc: 'Veja em um único fluxo os cenários de Unimed, Bradesco, SulAmérica, Amil, Hapvida e outras opções.',
     },
     {
-      icon: <BarChart className="w-8 h-8 text-trygg-teal" />,
-      title: 'Comparação Estratégica',
-      tagline: 'Independência Consultiva',
-      desc: 'Analisamos todas as principais operadoras de forma isenta, mostrando prós, contras, histórico de reajustes e redes credenciadas reais.',
+      icon: <ShieldCheck className="h-6 w-6" />,
+      title: 'Revisão contratual',
+      desc: 'Entenda se o contrato atual ainda faz sentido para o perfil de vidas e para o reajuste praticado.',
     },
     {
-      icon: <Headset className="w-8 h-8 text-trygg-teal" />,
-      title: 'Atendimento Especializado',
-      tagline: 'Suporte VIP Descomplicado',
-      desc: 'Sua empresa terá um gerente de contas dedicado. Chega de lidar com robôs do 0800 para resolver reembolsos, inclusões ou sinistros.',
+      icon: <TrendingDown className="h-6 w-6" />,
+      title: 'Redução de custos',
+      desc: 'Use a cotação para enxergar oportunidade de economia antes da renovação ou da primeira contratação.',
     },
     {
-      icon: <Landmark className="w-8 h-8 text-trygg-teal" />,
-      title: 'Foco Total em PMEs',
-      tagline: 'Expertise no Seu Segmento',
-      desc: 'Conhecemos as regras e tabelas especiais de contratação para empresas de 2 a 99 vidas, garantindo condições antes exclusivas a multinacionais.',
+      icon: <Handshake className="h-6 w-6" />,
+      title: 'Apoio na negociação',
+      desc: 'Leve mais segurança para negociar com a operadora atual ou comparar propostas novas.',
+    },
+    {
+      icon: <Headset className="h-6 w-6" />,
+      title: 'Atendimento especializado',
+      desc: 'Receba orientação para quem precisa decidir rápido sem travar o RH no processo.',
+    },
+    {
+      icon: <Wallet className="h-6 w-6" />,
+      title: 'Processo sem custo',
+      desc: 'Você envia os dados uma vez e recebe a análise sem custo pelo WhatsApp.',
     },
   ];
 
   return (
-    <section id="beneficios" className="py-20 sm:py-28 bg-white relative">
+    <section id="beneficios" className="py-16 sm:py-20 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16 animate-fade-in">
-          <div className="inline-flex items-center gap-1.5 bg-trygg-navy-900/5 text-trygg-navy-800 border border-trygg-navy-950/10 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-            Nossos Diferenciais
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-trygg-navy-900 tracking-tight">
-            A inteligência financeira aplicada à saúde corporativa
+        <div className="max-w-3xl text-left space-y-3 mb-10">
+          <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-trygg-teal">O que a cotação entrega</p>
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-trygg-navy-900">
+            Menos ruído, mais clareza para decidir sobre o plano
           </h2>
-          <p className="text-base sm:text-lg text-slate-500">
-            Oferecemos parcerias diretas com operadoras que alinham redução real de caixa com a máxima segurança jurídica e técnica para o RH da sua PME.
+          <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+            A estrutura foi montada para responder as dúvidas que mais travam a conversão: preço, operadora, troca e tempo de retorno.
           </p>
         </div>
 
-        {/* Benefits Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {benefits.map((benefit, idx) => (
             <div
-              key={idx}
-              className="group p-6 sm:p-8 bg-[#F8FAFC] border border-slate-100 rounded-2xl transition-all duration-300 hover:bg-white hover:border-trygg-teal/20 hover:shadow-xl hover:shadow-trygg-teal/[0.02] text-left relative"
+              key={benefit.title}
+              className="group rounded-[24px] border border-slate-200 bg-[linear-gradient(180deg,_#FFFFFF_0%,_#F8FAFC_100%)] p-5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-trygg-teal/20 hover:shadow-[0_18px_45px_rgba(15,23,42,0.08)]"
             >
-              {/* Left Accent Bar on Hover */}
-              <span className="absolute left-0 top-0 bottom-0 w-[3px] bg-transparent group-hover:bg-trygg-teal rounded-l-2xl transition-all duration-300"></span>
-
-              {/* Icon */}
-              <div className="mb-6 p-3 bg-white rounded-xl shadow-sm inline-block group-hover:scale-110 transition-transform duration-300">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-trygg-teal/10 text-trygg-teal transition-transform duration-300 group-hover:scale-110">
                 {benefit.icon}
               </div>
-
-              {/* Tagline */}
-              <p className="text-[10px] font-bold text-trygg-teal tracking-wider uppercase mb-1">
-                {benefit.tagline}
-              </p>
-
-              {/* Title */}
-              <h3 className="text-lg font-bold text-trygg-navy-900 mb-3 font-sans">
-                {benefit.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-sm text-slate-500 leading-relaxed">
-                {benefit.desc}
-              </p>
+              <div className="mt-5">
+                <div className="mb-2 inline-flex rounded-full bg-slate-900/5 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">
+                  0{idx + 1}
+                </div>
+                <h3 className="text-lg font-bold text-trygg-navy-900">{benefit.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">{benefit.desc}</p>
+              </div>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

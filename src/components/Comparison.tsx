@@ -1,126 +1,106 @@
 import React from 'react';
-import { X, Check } from 'lucide-react';
+import { ChevronDown, Users } from 'lucide-react';
+import type { AgeBandKey, QuoteFormState } from '../types';
 
-export const Comparison: React.FC = () => {
-  const comparisonData = [
-    {
-      feature: 'Gestão de Reajustes Anuais',
-      standard: 'Apenas repassa o índice cobrado pela operadora sem auditar.',
-      trygg: 'Análise técnica de mercado ativa para contestar e mitigar aumentos baseada no perfil da sua empresa.',
-      highlight: true,
-    },
-    {
-      feature: 'Modelo de Atendimento',
-      standard: 'Redireciona para o SAC/0800 impessoal das próprias operadoras.',
-      trygg: 'Gerente de contas exclusivo e dedicado para apoiar o RH e colaboradores.',
-      highlight: false,
-    },
-    {
-      feature: 'Paridade de Rede Credenciada',
-      standard: 'Oferece pacotes genéricos sem analisar os hospitais vitais dos sócios.',
-      trygg: 'Estudo sob medida para garantir que hospitais e médicos de confiança permaneçam.',
-      highlight: false,
-    },
-    {
-      feature: 'Estudo de Redução de Custos',
-      standard: 'Feito apenas na contratação inicial, ignorando o pós-venda.',
-      trygg: 'Análise financeira contínua e modelagem de coparticipação otimizada.',
-      highlight: true,
-    },
-    {
-      feature: 'Suporte a Reembolsos e Sinistros',
-      standard: 'Burocrático, lento e repassado inteiramente para o próprio RH resolver.',
-      trygg: 'Intermediação jurídica e técnica para destravar reembolsos e cirurgias complexas.',
-      highlight: false,
-    },
-  ];
+interface ComparisonProps {
+  quoteForm: Pick<QuoteFormState, 'ages'>;
+  totalAgeLives: number;
+  onAgeChange: (key: AgeBandKey, value: string) => void;
+}
 
+const AGE_BANDS: Array<{ key: AgeBandKey; label: string; hint: string }> = [
+  { key: 'age_00_18', label: '00 a 18 anos', hint: 'Dependentes e jovens colaboradores' },
+  { key: 'age_19_28', label: '19 a 28 anos', hint: 'Faixa adulta jovem' },
+  { key: 'age_29_38', label: '29 a 38 anos', hint: 'Fase de consolidação profissional' },
+  { key: 'age_39_48', label: '39 a 48 anos', hint: 'Faixa que impacta o cálculo técnico' },
+  { key: 'age_49_53', label: '49 a 53 anos', hint: 'Importante para paridade de propostas' },
+  { key: 'age_54_58', label: '54 a 58 anos', hint: 'Indicador sensível de precificação' },
+  { key: 'age_59_plus', label: '59 anos ou mais', hint: 'Faixa estratégica para a análise' },
+];
+
+export const Comparison: React.FC<ComparisonProps> = ({
+  quoteForm,
+  totalAgeLives,
+  onAgeChange,
+}) => {
   return (
-    <section id="comparativo" className="py-20 sm:py-28 bg-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-1.5 bg-trygg-navy-900/5 text-trygg-navy-800 border border-trygg-navy-950/10 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-            Visão Comparativa
+    <section id="composicao-etaria" className="py-16 sm:py-20 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,_#FFFFFF_0%,_#F8FAFC_100%)] pointer-events-none"></div>
+      <div className="absolute -top-20 right-0 h-72 w-72 rounded-full bg-trygg-teal/8 blur-3xl pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="mx-auto max-w-4xl rounded-[28px] border border-slate-200/80 bg-white/90 p-5 sm:p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur">
+          <details className="group" open={false}>
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-[22px] bg-[linear-gradient(135deg,_#0B192C_0%,_#132B4A_100%)] px-5 py-4 text-white shadow-lg shadow-slate-900/10">
+              <div className="text-left">
+                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-trygg-teal">CONSULTAR COMPOSIÇÃO ETÁRIA</p>
+                <h2 className="mt-1 text-xl sm:text-2xl font-black tracking-tight">Distribua as vidas por faixa etária</h2>
+                <p className="mt-1 text-sm text-slate-300">
+                  Utilize esta tabela apenas como referência. A análise completa considera diversos fatores além da idade.
+                </p>
+              </div>
+              <ChevronDown className="h-5 w-5 shrink-0 transition-transform duration-300 group-open:rotate-180" />
+            </summary>
+
+            <div className="mt-5 space-y-4 rounded-[22px] border border-slate-200 bg-slate-50/80 p-4 sm:p-5">
+              <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-trygg-teal/15 bg-white px-4 py-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-trygg-teal/10 text-trygg-teal">
+                  <Users className="h-5 w-5" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-bold text-trygg-navy-900">Total de vidas informadas: {totalAgeLives || '0'}</p>
+                  <p className="text-xs text-slate-500">A soma é calculada automaticamente pela composição.</p>
+                </div>
+                <div className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-slate-500">
+                  Total: {totalAgeLives}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {AGE_BANDS.map((band) => {
+                  const value = quoteForm.ages[band.key] || '';
+                  return (
+                    <div
+                      key={band.key}
+                      className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-md"
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <div>
+                          <p className="text-sm font-bold text-trygg-navy-900">{band.label}</p>
+                          <p className="text-xs text-slate-500">{band.hint}</p>
+                        </div>
+                        <span className="rounded-full bg-trygg-teal/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-trygg-teal">
+                          Vidas
+                        </span>
+                      </div>
+                      <input
+                        type="number"
+                        min="0"
+                        inputMode="numeric"
+                        value={value}
+                        onChange={(e) => onAgeChange(band.key, e.target.value)}
+                        className="mt-4 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-lg font-black text-trygg-navy-900 outline-none transition focus:border-trygg-teal focus:bg-white"
+                        placeholder="0"
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+
+              <p className="text-xs text-slate-500">
+                Se a empresa já tiver plano, a operadora atual e o perfil etário ajudam a refinar a cotação e identificar oportunidades reais de economia.
+              </p>
+            </div>
+          </details>
+
+          <div className="mt-4 flex items-center justify-between rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-3 text-left">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-slate-400">Atalho mobile</p>
+              <p className="text-sm font-semibold text-trygg-navy-900">Abra a composição etária quando precisar detalhar a cotação.</p>
+            </div>
+            <ChevronDown className="h-4 w-4 text-slate-400" />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-trygg-navy-900 tracking-tight">
-            A diferença entre corretagem comum e a parceria com a TRYGG
-          </h2>
-          <p className="text-base sm:text-lg text-slate-500">
-            A TRYGG não é uma corretora que apenas vende planos. Somos seus parceiros estratégicos em gestão de riscos e otimização financeira contínua.
-          </p>
         </div>
-
-        {/* Comparison Grid Table */}
-        <div className="overflow-x-auto rounded-3xl border border-slate-100 shadow-xl">
-          <table className="w-full min-w-[768px] text-left border-collapse bg-white">
-            <thead>
-              <tr className="bg-trygg-navy-900 text-white">
-                <th className="py-5 px-6 sm:px-8 font-sans font-bold text-sm uppercase tracking-wider w-[28%]">
-                  Critério de Gestão
-                </th>
-                <th className="py-5 px-6 sm:px-8 font-sans font-bold text-sm uppercase tracking-wider bg-slate-800 w-[36%]">
-                  Corretagem Tradicional
-                </th>
-                <th className="py-5 px-6 sm:px-8 font-sans font-bold text-sm uppercase tracking-wider bg-trygg-navy-900 border-l border-trygg-navy-800 w-[36%] relative">
-                  <div className="flex items-center gap-2">
-                    <span>Modelo de Parceria TRYGG</span>
-                    <span className="text-[9px] bg-trygg-teal text-white font-extrabold px-2 py-0.5 rounded-full uppercase tracking-widest leading-none">
-                      Recomendado
-                    </span>
-                  </div>
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {comparisonData.map((row, idx) => (
-                <tr
-                  key={idx}
-                  className={`transition-colors duration-200 ${
-                    row.highlight ? 'bg-trygg-teal-bg/30' : 'hover:bg-slate-50'
-                  }`}
-                >
-                  {/* Feature Title */}
-                  <td className="py-5 px-6 sm:px-8 font-bold text-trygg-navy-900 text-sm sm:text-base">
-                    {row.feature}
-                  </td>
-                  
-                  {/* Standard Broker */}
-                  <td className="py-5 px-6 sm:px-8 text-slate-400 text-xs sm:text-sm bg-slate-50/50">
-                    <div className="flex items-start gap-2.5">
-                      <X className="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" />
-                      <span>{row.standard}</span>
-                    </div>
-                  </td>
-                  
-                  {/* TRYGG model */}
-                  <td className="py-5 px-6 sm:px-8 text-trygg-navy-900 font-medium text-xs sm:text-sm border-l border-slate-100 bg-white relative">
-                    {/* Visual left colored border if highlighted */}
-                    {row.highlight && (
-                      <span className="absolute left-0 top-0 bottom-0 w-[3px] bg-trygg-teal"></span>
-                    )}
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-trygg-teal mt-0.5 flex-shrink-0" />
-                      <span className="font-semibold text-slate-700">{row.trygg}</span>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Perfect Equilibrium Callout */}
-        <div className="mt-12 text-center max-w-2xl mx-auto space-y-4">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
-            Equilíbrio Estratégico
-          </p>
-          <p className="text-sm text-slate-500 leading-relaxed">
-            Nossa missão é encontrar o ponto ideal entre <span className="font-bold text-trygg-navy-900">Preço Otimizado</span>, <span className="font-bold text-trygg-navy-900">Qualidade de Cobertura</span> e <span className="font-bold text-trygg-navy-900">Rede Credenciada Essencial</span>, operando sob pilares financeiros de alto impacto corporativo.
-          </p>
-        </div>
-
       </div>
     </section>
   );

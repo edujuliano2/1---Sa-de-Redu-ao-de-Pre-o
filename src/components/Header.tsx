@@ -44,20 +44,17 @@ export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
 
           {/* Navigation Links */}
           <nav className="hidden lg:flex items-center gap-8">
-            <a href="#dores" className="text-sm font-medium text-slate-500 hover:text-trygg-navy-900 transition-colors">
-              Desafios
-            </a>
-            <a href="#solucao" className="text-sm font-medium text-slate-500 hover:text-trygg-navy-900 transition-colors">
-              Solução
-            </a>
             <a href="#beneficios" className="text-sm font-medium text-slate-500 hover:text-trygg-navy-900 transition-colors">
-              Diferenciais
+              Benefícios
             </a>
-            <a href="#calculadora" className="text-sm font-medium text-slate-500 hover:text-trygg-navy-900 transition-colors">
-              Simulador de Economia
+            <a href="#economia" className="text-sm font-medium text-slate-500 hover:text-trygg-navy-900 transition-colors">
+              Economia
             </a>
-            <a href="#comparativo" className="text-sm font-medium text-slate-500 hover:text-trygg-navy-900 transition-colors">
-              Comparação
+            <a href="#composicao-etaria" className="text-sm font-medium text-slate-500 hover:text-trygg-navy-900 transition-colors">
+              Composição etária
+            </a>
+            <a href="#faq" className="text-sm font-medium text-slate-500 hover:text-trygg-navy-900 transition-colors">
+              FAQ
             </a>
           </nav>
 
@@ -69,7 +66,7 @@ export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
               className="inline-flex items-center gap-1.5 bg-trygg-navy-900 hover:bg-trygg-navy-800 text-white text-xs sm:text-sm font-semibold px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg transition-all duration-200 transform active:scale-95 shadow-sm hover:shadow-trygg-navy-900/10 hover:shadow"
             >
               <Sparkles className="w-3.5 h-3.5 text-trygg-teal" />
-              <span>Estudo de Planos</span>
+              <span>Cotar Agora</span>
             </button>
           </div>
         </div>

@@ -1,7 +1,11 @@
 import React from 'react';
 import { ShieldCheck, Mail, Phone, ExternalLink } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onPrivacyClick: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onPrivacyClick }) => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -30,10 +34,16 @@ export const Footer: React.FC = () => {
           <div className="space-y-3.5">
             <h4 className="text-white font-bold text-xs uppercase tracking-wider">Políticas e Navegação</h4>
             <div className="flex flex-col gap-2.5 text-xs text-slate-500 font-medium">
-              <a href="#dores" className="hover:text-white transition-colors">Desafios PMEs</a>
-              <a href="#solucao" className="hover:text-white transition-colors">Nosso Método</a>
-              <a href="#calculadora" className="hover:text-white transition-colors">Simulador de Custos</a>
-              <a href="#comparativo" className="hover:text-white transition-colors">Matriz Comparativa</a>
+              <a href="#beneficios" className="hover:text-white transition-colors">Benefícios</a>
+              <a href="#economia" className="hover:text-white transition-colors">Economia</a>
+              <a href="#composicao-etaria" className="hover:text-white transition-colors">Composição Etária</a>
+              <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
+              <button
+                onClick={onPrivacyClick}
+                className="hover:text-white transition-colors text-left bg-transparent border-none p-0 cursor-pointer focus:outline-none"
+              >
+                Política de Privacidade
+              </button>
             </div>
           </div>
 
@@ -51,7 +61,7 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-3.5 h-3.5 text-trygg-teal" />
-                <span>CNPJ: 00.000.000/0001-00</span>
+                <span>CNPJ: 52.393.423/0001-12</span>
               </div>
             </div>
           </div>

@@ -1,98 +1,93 @@
 import React from 'react';
-import { Search, Scale, BarChart3, ShieldCheck, HeartHandshake, UserCheck } from 'lucide-react';
+import { BarChart3, TrendingDown, Sparkles } from 'lucide-react';
 
 export const Solution: React.FC = () => {
-  const steps = [
-    {
-      number: '01',
-      icon: <Search className="w-5 h-5 text-trygg-teal" />,
-      title: 'Mapeamento de Necessidades',
-      desc: 'Mapeamento das necessidades da sua empresa, perfil de idade dos colaboradores e rede de hospitais essenciais para alinhar com as melhores operadoras.',
-    },
-    {
-      number: '02',
-      icon: <Scale className="w-5 h-5 text-trygg-teal" />,
-      title: 'Comparação Multiórgão',
-      desc: 'Cruzamos dados com as maiores operadoras do país para encontrar paridade técnica de rede, carências e coberturas com custos significativamente menores.',
-    },
-    {
-      number: '03',
-      icon: <BarChart3 className="w-5 h-5 text-trygg-teal" />,
-      title: 'Estudo de Redução de Custos',
-      desc: 'Apresentamos cenários inteligentes (com ou sem coparticipação otimizada) detalhando a economia exata e o ROI da migração contratual.',
-    },
-    {
-      number: '04',
-      icon: <ShieldCheck className="w-5 h-5 text-trygg-teal" />,
-      title: 'Migração Sem Atrito',
-      desc: 'Cuidamos de toda a burocracia de cancelamento, portabilidade de carências e implantação do novo plano de forma segura, sem deixar ninguém descoberto.',
-    },
-    {
-      number: '05',
-      icon: <HeartHandshake className="w-5 h-5 text-trygg-teal" />,
-      title: 'Suporte Pós-Venda Ativo',
-      desc: 'Não desaparecemos após a assinatura. Nossa equipe especializada cuida do suporte operacional, reembolsos complexos e movimentação cadastral.',
-    },
-    {
-      number: '06',
-      icon: <UserCheck className="w-5 h-5 text-trygg-teal" />,
-      title: 'Gestão de Reajustes no Futuro',
-      desc: 'Monitoramos preventivamente o uso do plano ao longo do ano para negociar e mitigar aumentos futuros de forma estritamente técnica com a operadora.',
-    },
+  const bars = [
+    { label: '8%', width: 'w-[22%]', tone: 'bg-slate-300' },
+    { label: '17%', width: 'w-[45%]', tone: 'bg-slate-400' },
+    { label: '26%', width: 'w-[70%]', tone: 'bg-trygg-teal' },
+    { label: '37%', width: 'w-[100%]', tone: 'bg-trygg-navy-900' },
   ];
 
   return (
-    <section id="solucao" className="py-20 sm:py-28 bg-[#F8FAFC] relative">
-      {/* Background visual detail */}
-      <div className="absolute inset-0 bg-grid-dots-dark opacity-30 pointer-events-none"></div>
+    <section id="economia" className="py-16 sm:py-20 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,_#FFFFFF_0%,_#F8FAFC_100%)] pointer-events-none"></div>
+      <div className="absolute -left-24 bottom-0 h-80 w-80 rounded-full bg-trygg-teal/10 blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-1.5 bg-trygg-teal/10 text-trygg-teal border border-trygg-teal/20 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-            Inteligência em Ação
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-trygg-navy-900 tracking-tight">
-            Como a TRYGG ajuda sua empresa a economizar
-          </h2>
-          <p className="text-base sm:text-lg text-slate-500">
-            Muito além de uma simples cotação. Nosso método combina análise técnica das operadoras, poder de negociação de mercado e parcerias estratégicas para o melhor custo-benefício.
-          </p>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+          <div className="lg:col-span-5 rounded-[28px] border border-slate-200 bg-white p-6 sm:p-8 shadow-[0_18px_55px_rgba(15,23,42,0.08)] text-left">
+            <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-trygg-teal">Seção de economia</p>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-black tracking-tight text-trygg-navy-900">
+              QUANTO SUA EMPRESA PODE ECONOMIZAR?
+            </h2>
+            <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
+              Empresas que revisam seus contratos frequentemente encontram oportunidades de redução entre <span className="font-bold text-trygg-navy-900">8% e 37%</span>.
+            </p>
 
-        {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {steps.map((step, idx) => (
-            <div
-              key={idx}
-              className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 text-left relative group"
-            >
-              {/* Corner Number Badge */}
-              <span className="absolute top-4 right-6 text-2xl font-black text-slate-100 group-hover:text-trygg-teal/15 transition-colors duration-300">
-                {step.number}
-              </span>
-
-              {/* Icon Container */}
-              <div className="mb-6 w-10 h-10 bg-trygg-teal/10 rounded-xl flex items-center justify-center group-hover:bg-trygg-teal group-hover:text-white transition-all duration-300">
-                {React.cloneElement(step.icon, {
-                  className: `w-5 h-5 text-trygg-teal group-hover:text-white transition-all duration-300`,
-                })}
+            <div className="mt-6 rounded-[24px] bg-[linear-gradient(180deg,_#0B192C_0%,_#132B4A_100%)] p-5 text-white shadow-2xl">
+              <div className="flex items-center gap-2 text-trygg-teal">
+                <Sparkles className="h-4 w-4" />
+                <span className="text-[11px] font-bold uppercase tracking-[0.22em]">Impacto potencial</span>
               </div>
-
-              {/* Title */}
-              <h3 className="text-lg font-bold text-trygg-navy-900 mb-2.5 font-sans">
-                {step.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-sm text-slate-500 leading-relaxed">
-                {step.desc}
-              </p>
+              <div className="mt-4 flex items-end gap-3">
+                <p className="text-5xl font-black tracking-tight">37%</p>
+                <p className="pb-1 text-sm text-slate-300">faixa de economia observada em revisões bem estruturadas</p>
+              </div>
             </div>
-          ))}
-        </div>
+          </div>
 
+          <div className="lg:col-span-7 rounded-[28px] border border-slate-200 bg-white p-6 sm:p-8 shadow-[0_18px_55px_rgba(15,23,42,0.08)] text-left">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">Gráfico moderno</p>
+                <h3 className="mt-1 text-2xl font-black tracking-tight text-trygg-navy-900">
+                  Comparativo visual de potencial de redução
+                </h3>
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-trygg-teal/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-trygg-teal">
+                <BarChart3 className="h-4 w-4" />
+                Corporativo
+              </div>
+            </div>
+
+            <div className="mt-8 space-y-4">
+              {bars.map((bar) => (
+                <div key={bar.label} className="space-y-2">
+                  <div className="flex items-center justify-between text-sm font-semibold text-slate-500">
+                    <span>Redução potencial</span>
+                    <span>{bar.label}</span>
+                  </div>
+                  <div className="h-4 rounded-full bg-slate-100 p-1">
+                    <div className={`h-full rounded-full ${bar.width} ${bar.tone} transition-all duration-700`} />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                ['Reajustes sob controle', 'Leitura mais clara da renovação'],
+                ['Troca com segurança', 'Cenários comparados com objetividade'],
+                ['Decisão mais rápida', 'Cotação enviada no WhatsApp'],
+              ].map(([title, desc]) => (
+                <div key={title} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                  <p className="text-sm font-bold text-trygg-navy-900">{title}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-slate-500">{desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 rounded-2xl border border-trygg-teal/15 bg-trygg-teal/5 p-4">
+              <div className="flex items-start gap-3">
+                <TrendingDown className="mt-0.5 h-5 w-5 shrink-0 text-trygg-teal" />
+                <p className="text-sm leading-relaxed text-slate-700">
+                  A leitura visual ajuda o usuário a entender o valor da cotação antes mesmo de enviar os dados.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
